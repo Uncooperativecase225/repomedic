@@ -1,0 +1,41 @@
+server:
+  address: 127.0.0.1
+  port: 8080
+  shutdown: graceful
+spring:
+  application:
+    name: repomedic
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/repomedic?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:repomedic}
+    password: ${DB_PASSWORD:repomedic_local_only}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_MODEL:qwen3.5:9b}
+          temperature: 0.1
+          num-ctx: 8192
+  task:
+    execution:
+      pool:
+        core-size: 2
+        max-size: 3
+        queue-capacity: 20
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+repomedic:
+  cors-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
+  process-timeout-seconds: ${PROCESS_TIMEOUT_SECONDS:120}
+  max-output-chars: ${MAX_OUTPUT_CHARS:30000}
+  ollama-model: ${OLLAMA_MODEL:qwen3.5:9b}

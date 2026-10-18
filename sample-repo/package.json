@@ -1,0 +1,14 @@
+{
+  "name": "repomedic-sample-target",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": "~5.7.2"
+  }
+}
